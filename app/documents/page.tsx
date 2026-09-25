@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FileText, Search, Sparkles, WandSparkles, X } from "lucide-react";
 import { documents } from "@/data/documents";
@@ -18,14 +18,12 @@ const TYPE_TONE: Record<string, "accent" | "ok" | "warn" | "muted"> = {
   PDF: "accent",
   Word: "ok",
   Text: "muted",
+  Sheet: "warn",
+  Markdown: "accent",
 };
 
 export default function DocumentsPage() {
-  return (
-    <Suspense fallback={<div className="p-8 text-sm text-ink-3">Loading documents…</div>}>
-      <DocumentsInner />
-    </Suspense>
-  );
+  return <DocumentsInner />;
 }
 
 function DocumentsInner() {

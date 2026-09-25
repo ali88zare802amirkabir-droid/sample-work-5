@@ -13,6 +13,8 @@ import { useApp } from "@/lib/store";
 import { greeting } from "@/lib/utils";
 import { recentActivity, usageLast7 } from "@/data/usage";
 import { templates } from "@/data/templates";
+import { projects } from "@/data/projects";
+import { documents } from "@/data/documents";
 import {
   ActivityRow,
   DemoNote,
@@ -31,6 +33,8 @@ export default function OverviewPage() {
   const { workspaceId } = useApp();
   const name = workspaceId === "personal" ? "there" : "Ali";
   const weekRequests = usageLast7.reduce((s, d) => s + d.requests, 0);
+  const weekTokens = usageLast7.reduce((s, d) => s + d.tokens, 0);
+  const weekTokensK = `${Math.round(weekTokens / 1000)}K`;
 
   return (
     <div className="mx-auto max-w-[1240px] space-y-6 px-4 sm:px-6">
@@ -54,10 +58,10 @@ export default function OverviewPage() {
       </div>
 
       <div className="grid grid-cols-2 gap-3.5 lg:grid-cols-4">
-        <KpiCell label="AI Requests" value="1,284" delta="12.4%" up accent="blue" icon={<Zap className="h-4 w-4" />} />
-        <KpiCell label="Tokens Used" value="842K" delta="8.1%" up accent="violet" icon={<Bot className="h-4 w-4" />} />
-        <KpiCell label="Active Projects" value="12" delta="2 new" up accent="emerald" icon={<FolderKanban className="h-4 w-4" />} />
-        <KpiCell label="Saved Documents" value="38" delta="5 this week" up accent="amber" icon={<FileText className="h-4 w-4" />} />
+        <KpiCell label="AI Requests" value={weekRequests.toLocaleString("en-US")} delta="12.4%" up accent="blue" icon={<Zap className="h-4 w-4" />} />
+        <KpiCell label="Tokens Used" value={weekTokensK} delta="8.1%" up accent="violet" icon={<Bot className="h-4 w-4" />} />
+        <KpiCell label="Active Projects" value={String(projects.length)} delta="2 new" up accent="emerald" icon={<FolderKanban className="h-4 w-4" />} />
+        <KpiCell label="Saved Documents" value={String(documents.length)} delta="5" up accent="amber" icon={<FileText className="h-4 w-4" />} />
       </div>
 
       <div className="grid gap-4 xl:grid-cols-[1.5fr_1fr]">

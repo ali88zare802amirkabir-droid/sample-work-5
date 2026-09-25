@@ -74,9 +74,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const t = window.setTimeout(() => {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      const state = raw ? (JSON.parse(raw) as unknown) : null;
-      const p = pickPersisted(state);
+      let p: PersistedState | null = null;
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        p = raw ? pickPersisted(JSON.parse(raw)) : null;
+      } catch {
+        p = null;
+      }
       if (p) {
         setSettingsState(p.settings);
         setWorkspaceId(p.workspaceId);

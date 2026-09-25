@@ -17,6 +17,7 @@ export default function UsagePage() {
   const reqPct = Math.round((planUsage.requestsUsed / planUsage.requestsLimit) * 100);
   const tokPct = Math.round((planUsage.tokensUsed / planUsage.tokensLimit) * 100);
   const weekTotals = usageLast7.reduce((a, d) => ({ requests: a.requests + d.requests, tokens: a.tokens + d.tokens }), { requests: 0, tokens: 0 });
+  const peak = usageLast7.reduce((a, b) => (b.requests > a.requests ? b : a), usageLast7[0]);
 
   return (
     <div className="mx-auto max-w-[1100px] space-y-6 px-4 sm:px-6">
@@ -71,7 +72,7 @@ export default function UsagePage() {
           <div className="mt-4">
             <BarChart data={usageLast7.map((d) => ({ label: d.label, value: d.requests }))} />
           </div>
-          <p className="mt-3 text-[11.5px] text-ink-3">Requests by weekday. Peak: Friday with {formatNum(538)} — the launch push.</p>
+          <p className="mt-3 text-[11.5px] text-ink-3">Requests by weekday. Peak: {peak.label} with {formatNum(peak.requests)} — the launch push.</p>
         </div>
       </div>
 

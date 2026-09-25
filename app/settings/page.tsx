@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { MonitorCog, Moon, RotateCcw, Sun, WandSparkles } from "lucide-react";
 import { useApp } from "@/lib/store";
 import { cn } from "@/lib/utils";
@@ -8,6 +9,7 @@ import { DemoNote } from "@/components/dashboard/widgets";
 
 export default function SettingsPage() {
   const { settings, setSettings, toast } = useApp();
+  const [confirmReset, setConfirmReset] = useState(false);
 
   const toggle = (key: keyof typeof settings) => setSettings({ [key]: !settings[key] });
 
@@ -24,7 +26,7 @@ export default function SettingsPage() {
           <MonitorCog className="h-4 w-4 text-accent" />
           Appearance
         </h2>
-        <p className="mt-0.5 text-[12.5px] text-ink-3">Themes are scoped to this demo — no light-mode regrets.</p>
+        <p className="mt-0.5 text-[12.5px] text-ink-3">Switch anytime — your choice is applied instantly and remembered in this browser.</p>
         <div className="mt-4 grid grid-cols-2 gap-3">
           {(["dark", "light"] as const).map((t) => (
             <button
@@ -95,13 +97,18 @@ export default function SettingsPage() {
           variant="ghost"
           className="mt-3 text-danger hover:bg-danger-soft hover:text-danger"
           onClick={() => {
+            if (!confirmReset) {
+              setConfirmReset(true);
+              window.setTimeout(() => setConfirmReset(false), 4000);
+              return;
+            }
             window.localStorage.removeItem("nexaai");
             toast("Demo data reset", { desc: "Reloading…", variant: "info" });
             window.setTimeout(() => window.location.reload(), 400);
           }}
         >
           <RotateCcw className="h-4 w-4" />
-          Reset demo data
+          {confirmReset ? "Click again to confirm" : "Reset demo data"}
         </Button>
       </section>
     </div>

@@ -77,10 +77,7 @@ export default function ChatPage({ initialChatId, newChat, tplId }: { initialCha
         const tpl = templates.find((t) => t.id === tplId);
         const chat = createChat("pro");
         setActiveId(chat.id);
-        if (tpl) {
-          setTyping(true);
-          doSend(chat, tpl.prompt);
-        }
+        if (tpl) setInput(tpl.prompt);
         router.replace("/chat", { scroll: false });
       } else if (newChat) {
         const chat = createChat("pro");
