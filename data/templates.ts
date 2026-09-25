@@ -1,0 +1,86 @@
+import type { Template } from "@/lib/types";
+
+export const templates: Template[] = [
+  {
+    id: "tpl-product",
+    title: "Product Description",
+    desc: "Write a storefront-ready description with benefits, specs and a one-line hook.",
+    category: "Writing",
+    uses: 1284,
+    prompt: "Create a short product description for a wireless keyboard.",
+  },
+  {
+    id: "tpl-blog",
+    title: "Blog Outline",
+    desc: "A three-movement article structure with a clear takeaway and CTA.",
+    category: "Writing",
+    uses: 962,
+    prompt: "Create an outline for a blog post about AI workspaces for small teams.",
+  },
+  {
+    id: "tpl-email",
+    title: "Email Writer",
+    desc: "Calm, low-pressure outreach and launch emails that actually get replies.",
+    category: "Marketing",
+    uses: 1410,
+    prompt: "Write a short, friendly cold outreach email for a small studio.",
+  },
+  {
+    id: "tpl-campaign",
+    title: "Campaign Angle",
+    desc: "Distill a launch into one narrative and a channel mix.",
+    category: "Marketing",
+    uses: 755,
+    prompt: "Help me brainstorm a marketing angle for a spring product launch.",
+  },
+  {
+    id: "tpl-code",
+    title: "Code Explanation",
+    desc: "Explain a snippet in plain terms with a quick code walkthrough.",
+    category: "Development",
+    uses: 1880,
+    prompt: "Explain what this debounced search hook does and how to use it.",
+  },
+  {
+    id: "tpl-snippet",
+    title: "Snippet Generator",
+    desc: "Type a small, well-scoped function with proper cleanup.",
+    category: "Development",
+    uses: 1103,
+    prompt: "Generate a small TypeScript hook that debounces a search input.",
+  },
+  {
+    id: "tpl-summary",
+    title: "Meeting Summary",
+    desc: "Turn long notes into decisions, owners and next actions.",
+    category: "Business",
+    uses: 1337,
+    prompt: "Summarize the key decisions from the quarterly review notes.",
+  },
+  {
+    id: "tpl-brief",
+    title: "Project Brief",
+    desc: "A slim skeleton: context, goals, approach and next steps.",
+    category: "Business",
+    uses: 891,
+    prompt: "Draft an outline for a product launch project brief.",
+  },
+  {
+    id: "tpl-notes",
+    title: "Study Notes",
+    desc: "Condense dense material into digestible, structured notes.",
+    category: "Education",
+    uses: 640,
+    prompt: "Turn these study notes into a clean summary with key takeaways.",
+  },
+  {
+    id: "tpl-explain",
+    title: "Explain It Simply",
+    desc: "Explain any concept to a smart non-expert in plain language.",
+    category: "Education",
+    uses: 512,
+    prompt: "Explain retrieval-augmented generation to a non-technical teammate.",
+  },
+];
+
+export const templateCategories = ["Writing", "Marketing", "Development", "Business", "Education"] as const;
